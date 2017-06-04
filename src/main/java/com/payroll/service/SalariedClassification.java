@@ -1,7 +1,7 @@
 package com.payroll.service;
 public class SalariedClassification implements PaymentClassification {
 	private double MonthlyPay;
-	private String messege="领月薪员工";
+	private String messege="缂栧埗鍛樺伐";
 	public String getMessege() {
 		return messege;
 	}
@@ -28,7 +28,7 @@ public class SalariedClassification implements PaymentClassification {
 		MonthlyPay = monthlyPay;
 	}
 	public String toString(){
-		return "领月薪员工";
+		return "缂栧埗鍛樺伐";
 	}
 
 }

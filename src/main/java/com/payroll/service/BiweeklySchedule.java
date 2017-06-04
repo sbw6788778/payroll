@@ -1,9 +1,9 @@
 package com.payroll.service;
 import java.util.Calendar;
 import java.util.Date;
-//双周结算
+//双锟杰斤拷锟斤拷
 public class BiweeklySchedule implements PaymentSchedule {
-	private String messege="两周支付";
+	private String messege="鍙屽懆鏀粯";
 	public String getMessege() {
 		return messege;
 	}
@@ -22,6 +22,6 @@ public class BiweeklySchedule implements PaymentSchedule {
 		return ca.getTime();
 	}
 	public String toString (){
-		return "两周支付";
+		return "鍙屽懆鏀粯";
 	}
 }

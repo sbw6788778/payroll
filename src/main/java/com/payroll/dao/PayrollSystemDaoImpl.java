@@ -122,15 +122,15 @@ public class PayrollSystemDaoImpl extends SqlSessionDaoSupport implements Payrol
 	 private void loadSchedule(Employee e,SqlSession session){
 		 	int id=e.getId();
 		 	String scheduletype=session.selectOne("loadSchedule",id);
-			 if(scheduletype.equals("ÖÜÖ§¸¶")){
+			 if(scheduletype.equals("å‘¨æ”¯ä»˜")){
 				 e.setSchedule(new WeeklySchedule());
 				 e.setClassification((HourlyClassification)session.selectOne("loadHourlyClassification",id));
 			 }
-			 else if(scheduletype.equals("Á½ÖÜÖ§¸¶")){
+			 else if(scheduletype.equals("ä¸¤å‘¨æ”¯ä»˜")){
 				 e.setSchedule(new BiweeklySchedule());
 				 e.setClassification((CommissionedClassification)session.selectOne("loadCommissionedClassification",id));
 			 }
-			 else if(scheduletype.equals("ÔÂÖ§¸¶")){
+			 else if(scheduletype.equals("æœˆæ”¯ä»˜")){
 				 e.setSchedule(new MonthlySchedule());
 				 e.setClassification((SalariedClassification)session.selectOne("loadSalariedClassification",id));
 			 }
@@ -139,13 +139,13 @@ public class PayrollSystemDaoImpl extends SqlSessionDaoSupport implements Payrol
 	 private void loadPaymentMethodTable(Employee e,SqlSession session){
 		 	int id=e.getId();
 		 	String paymentMethod=session.selectOne("loadPaymentMethod",id);
-			 if(paymentMethod.equals("Ö§Æ±´òÈëÒøĞĞÕË»§")){
+			 if(paymentMethod.equals("å­˜å…¥é“¶è¡Œ")){
 				 e.setMethod((DirectMethod)session.selectOne("loadDirectMethod", id));
 			 }
-			 else if(paymentMethod.equals("Ö§Æ±±£´æÔÚ³öÄÉÈËÔ±")){
+			 else if(paymentMethod.equals("æ”¯ç¥¨ä¿å­˜åœ¨å‡ºçº³äººå‘˜")){
 				 e.setMethod(new HoldMethod());
 			 }
-			 else if(paymentMethod.equals("Ö§Æ±ÓÊ¼Ä")){
+			 else if(paymentMethod.equals("æ”¯ç¥¨é‚®å¯„")){
 				 e.setMethod((MailMethod)session.selectOne("loadMailMethod", id));
 			 }
 			 else
@@ -252,15 +252,15 @@ public class PayrollSystemDaoImpl extends SqlSessionDaoSupport implements Payrol
 		SqlSession session=this.getSqlSession();
 		String password_ture= session.selectOne("loginEmployeeVerification", username);
 		if(password.equals(password_ture))
-			 return "ÃÜÂëÕıÈ·";
-		 else return "ÃÜÂë´íÎó";
+			 return "éªŒè¯æˆåŠŸ";
+		 else return "éªŒè¯å¤±è´¥";
 	}
 	public String loginAdminVerification(String username,String password){
 		SqlSession session=this.getSqlSession();
 		String password_ture= session.selectOne("loginAdminVerification", username);
 		if(password.equals(password_ture))
-			 return "ÃÜÂëÕıÈ·";
-		 else return "ÃÜÂë´íÎó";
+			 return "éªŒè¯æˆåŠŸ";
+		 else return "éªŒè¯å¤±è´¥";
 	}
 	public int getIdByUsername(String username){
 		SqlSession session=this.getSqlSession();

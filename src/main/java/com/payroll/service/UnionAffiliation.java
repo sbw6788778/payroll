@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 public class UnionAffiliation extends Affiliation {
-	private String messege="工会成员";
+	private String messege="宸ヤ細鎴愬憳";
 	public String getMessege() {
 		return messege;
 	}
@@ -64,6 +64,6 @@ public class UnionAffiliation extends Affiliation {
 		return totlePay;
 	}
 	public String toString(){
-		return "工会成员";
+		return "宸ヤ細鎴愬憳";
 	}
 }

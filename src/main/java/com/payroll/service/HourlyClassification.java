@@ -4,8 +4,8 @@ import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Calendar;
 public class HourlyClassification implements PaymentClassification {
-	//Ã¿Ğ¡Ê±µÄ±¨³ê
-	private String messege="Ğ¡Ê±¹¤";
+	//Ã¿Ğ¡Ê±ï¿½Ä±ï¿½ï¿½ï¿½
+	private String messege="å°æ—¶å·¥";
 	public String getMessege() {
 		return messege;
 	}
@@ -32,7 +32,7 @@ public class HourlyClassification implements PaymentClassification {
 	public double calculatePay(Paycheck paycheck) {
 		double totalPay=0.0;
 		for(Date t:timeCard.keySet()){
-			//ÅĞ¶Ï´òµÄÊ±¼ä±íÊÇ·ñÔÚÕâ¸öÖ§¸¶ÖÜÆÚÄÚ
+			//ï¿½Ğ¶Ï´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(DateUtil.isInPayPeriod(timeCard.get(t).getDate(),paycheck.getStartDate(),paycheck.getDateTime()))
 				totalPay+=calculatePayForTimeCard(timeCard.get(t));
 		}
@@ -44,7 +44,7 @@ public class HourlyClassification implements PaymentClassification {
 		return HourlyRate*normalHours+HourlyRate*1.5*overtimeHours;
 	}
 	public String toString(){
-		return "Ğ¡Ê±¹¤";
+		return "å°æ—¶å·¥";
 	}
 
 }

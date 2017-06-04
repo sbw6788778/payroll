@@ -7,7 +7,7 @@ public class DirectMethod implements PaymentMethod {
 	public void setAccount(String account) {
 		Account = account;
 	}
-	private String messege="支票打入银行账户";
+	private String messege="瀛樺叆閾惰";
 	public String getMessege() {
 		return messege;
 	}
@@ -27,6 +27,6 @@ public class DirectMethod implements PaymentMethod {
 		this.paycheck=c;
 	}
 	public String toString(){
-		return "支票打入银行账户";
+		return "瀛樺叆閾惰";
 	}
 }

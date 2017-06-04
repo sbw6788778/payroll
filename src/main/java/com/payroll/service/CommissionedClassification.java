@@ -5,7 +5,7 @@ import java.util.Date;
 public class CommissionedClassification implements PaymentClassification {
 	private double BasePay;
 	private double CommissionRate;
-	private String messege="ÁìÌá³É¼Ó2ÖÜĞ½Ô±¹¤";
+	private String messege="ç»©æ•ˆå·¥";
 	public String getMessege() {
 		return messege;
 	}
@@ -48,7 +48,7 @@ public class CommissionedClassification implements PaymentClassification {
 
 	}
 	public String toString(){
-		return "ÁìÌá³É¼Ó2ÖÜĞ½Ô±¹¤";
+		return "ç»©æ•ˆå·¥";
 	}
 
 }

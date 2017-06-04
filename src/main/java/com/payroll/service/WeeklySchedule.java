@@ -2,7 +2,7 @@ package com.payroll.service;
 import java.util.Calendar;
 import java.util.Date;
 public class WeeklySchedule implements PaymentSchedule {
-	private String messege="ÖÜÖ§¸¶";
+	private String messege="å‘¨æ”¯ä»˜";
 	public String getMessege() {
 		return messege;
 	}
@@ -21,6 +21,6 @@ public class WeeklySchedule implements PaymentSchedule {
 		return ca.getTime();
 	}
 	public String toString(){
-		return "ÖÜÖ§¸¶";
+		return "å‘¨æ”¯ä»˜";
 	}
 }

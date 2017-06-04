@@ -2,7 +2,7 @@ package com.payroll.service;
 
 public class HoldMethod implements PaymentMethod {
 	private Paycheck paycheck;
-	private String messege="Ö§Æ±±£´æÔÚ³öÄÉÈËÔ±";
+	private String messege="æ”¯ç¥¨ä¿å­˜åœ¨å‡ºçº³äººå‘˜";
 	public String getMessege() {
 		return messege;
 	}
@@ -13,6 +13,6 @@ public class HoldMethod implements PaymentMethod {
 		this.paycheck=c;
 	}
 	public String toString(){
-		return "Ö§Æ±±£´æÔÚ³öÄÉÈËÔ±";
+		return "æ”¯ç¥¨ä¿å­˜åœ¨å‡ºçº³äººå‘˜";
 	}
 }

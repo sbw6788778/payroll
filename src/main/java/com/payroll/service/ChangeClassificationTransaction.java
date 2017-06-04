@@ -10,7 +10,8 @@ public abstract class ChangeClassificationTransaction extends ChangeEmployeeTran
 		e.setClassification(classification());
 		e.setSchedule(schedule());
 		database.AddEmployee(id, e);
-		database.AddRegisterMessage(id,u.getUsername(),u.getPassword(),u.getEmail());
+		if(u!=null)
+			database.AddRegisterMessage(id,u.getUsername(),u.getPassword(),u.getEmail());
 	}
 	public ChangeClassificationTransaction() {
 		// TODO Auto-generated constructor stub

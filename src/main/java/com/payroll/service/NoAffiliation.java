@@ -1,7 +1,7 @@
 package com.payroll.service;
 
 public class NoAffiliation extends Affiliation {
-	private String messege="·Ç¹¤»á³ÉÔ±";
+	private String messege="éå·¥ä¼šæˆå‘˜";
 	public String getMessege() {
 		return messege;
 	}
@@ -12,7 +12,7 @@ public class NoAffiliation extends Affiliation {
 		return 0;
 	}
 	public String toString(){
-		return "·Ç¹¤»á³ÉÔ±";
+		return "éå·¥ä¼šæˆå‘˜";
 	}
 
 }

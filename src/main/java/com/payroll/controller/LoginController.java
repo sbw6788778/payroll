@@ -22,11 +22,11 @@ public class LoginController {
 	@RequestMapping(value="/Admin")
 	public String loginAdmin(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("password") String password,ModelMap m){
 		String result= payrollDao.loginAdminVerification(username, password);
-		if(result.equals("ÃÜÂëÕıÈ·")){
+		if(result.equals("éªŒè¯æˆåŠŸ")){
 			request.getSession().setAttribute("user",username);
 			return "adminFunction";
 		}
-		else if(result.equals("ÃÜÂë´íÎó")){
+		else if(result.equals("éªŒè¯å¤±è´¥")){
 			return "index";
 		}
 		else {
@@ -38,11 +38,11 @@ public class LoginController {
 		u.setUsername(username);
 		u.setPassword(password);
 		String result=u.EmployeeVerification();
-		if(result.equals("ÃÜÂëÕıÈ·")){
+		if(result.equals("éªŒè¯æˆåŠŸ")){
 			request.getSession().setAttribute("user", u);
 			return "redirect:/personalMessege";
 		}
-		else if(result.equals("ÃÜÂë´íÎó")){
+		else if(result.equals("éªŒè¯å¤±è´¥")){
 			return "index";
 		}
 		else {

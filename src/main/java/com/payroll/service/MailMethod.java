@@ -2,7 +2,7 @@ package com.payroll.service;
 
 public class MailMethod implements PaymentMethod {
 	private String Address;
-	private String messege="֧Ʊ�ʼ�";
+	private String messege="支票邮寄";
 	public String getMessege() {
 		return messege;
 	}
@@ -27,6 +27,6 @@ public class MailMethod implements PaymentMethod {
 		this.paycheck=c;
 	}
 	public String toString(){
-		return "֧Ʊ�ʼ�";
+		return "支票邮寄";
 	}
 }
