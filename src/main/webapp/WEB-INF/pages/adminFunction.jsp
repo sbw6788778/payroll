@@ -19,7 +19,7 @@
 		<div>
 			<ul class="nav navbar-nav">
 				<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege">显示所有员工信息</a></li>
-				<li><a href="<%=request.getContextPath()%>/deleteEmployee.jsp">删除员工</a></li>
+				<li><button id="delectemployee">删除员工</button></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						增加员工
@@ -40,6 +40,17 @@
           </ul>
         </div>
 		</div>
-	</nav> 
+	</nav>
+	<form id="form" class="form-horizontal" role="form" action="<%=request.getContextPath()%>/DeleteEmployee" method="post">
+	</form>
+<script src=/js/jquery.js">
+</script>
+<script>
+	$(document).ready(function(){
+  		$("#delectemployee").click(function(){
+    		$("#form").load("<%=request.getContextPath()%>/deleteEmployee.html");
+  		});
+	});
+</script>	 
 </body>
 </html>
