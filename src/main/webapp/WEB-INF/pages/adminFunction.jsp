@@ -19,16 +19,16 @@
 		<div>
 			<ul class="nav navbar-nav">
 				<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege">显示所有员工信息</a></li>
-				<li><button id="delectemployee">删除员工</button></li>
+				<li><button type="button" class="list-group-item" id="delectemployee">删除员工</button></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						增加员工
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=request.getContextPath()%>/addHourlyEmployee.jsp">增加小时工</a></li>
-						<li><a href="<%=request.getContextPath()%>/addSalaryEmployee.jsp">增加编制人员</a></li>
-						<li><a href="<%=request.getContextPath()%>/addCommissionEmployee.jsp">增加绩效工</a></li>
+						<li><button type="button" class="list-group-item" id="addhourlyemployee">增加小时工</button></li>
+						<li><button type="button" class="list-group-item" id="addsalaryemployee">增加编制人员</button></li>
+						<li><button type="button" class="list-group-item" id="addcommissionemployee">增加绩效工</button></li>
 					</ul>
 				</li>
 			</ul>
@@ -41,14 +41,28 @@
         </div>
 		</div>
 	</nav>
-	<form id="form" class="form-horizontal" role="form" action="<%=request.getContextPath()%>/DeleteEmployee" method="post">
-	</form>
-<script src=/js/jquery.js">
+	<nav id="nav"></nav>
+<script src=/js/jquery.js" charset="utf-8">
 </script>
 <script>
 	$(document).ready(function(){
   		$("#delectemployee").click(function(){
-    		$("#form").load("<%=request.getContextPath()%>/deleteEmployee.html");
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #deletemployeeform");
+  		});
+	});
+	$(document).ready(function(){
+  		$("#addhourlyemployee").click(function(){
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #addhourlyemployeeform");
+  		});
+	});
+	$(document).ready(function(){
+  		$("#addsalaryemployee").click(function(){
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #addsalaryemployeeform");
+  		});
+	});
+	$(document).ready(function(){
+  		$("#addcommissionemployee").click(function(){
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #addcommissionemployeeform");
   		});
 	});
 </script>	 
