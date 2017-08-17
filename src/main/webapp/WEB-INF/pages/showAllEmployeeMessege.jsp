@@ -245,4 +245,18 @@
     <li><a href="#">&raquo;</a></li>
 </ul>
 </body>
+<script language="javascript" type="text/javascript">    
+    $(function(){    
+        $("#getBtn").click(function(){    
+            $.getJSON("showAllEmployeeMessege",  
+                {action: "GetOnePersonJsonData"},    
+                function(data){  
+                    var allEmployees =data;  
+                    jsonData += "name: " + data.name + "<br/>" +  
+                                "age: " + data.age;  
+                    $("#dataArea").html(jsonData);  
+                });    
+            });  
+    });  
+    </script>  
 </html>

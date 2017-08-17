@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.payroll.service.Employee;
 import com.payroll.service.ShowAllEmployeeMessegeService;
@@ -17,10 +18,10 @@ public class ShowAllEmployeeMessegeController {
 	@Autowired
 	ShowAllEmployeeMessegeService s;
 	@RequestMapping("showAllEmployeeMessege")
-	public String  showAllEmployeeMessege(Model m,HttpServletResponse response){
+	@ResponseBody
+	public List<Employee>  showAllEmployeeMessege(Model m,HttpServletResponse response){
 		response.setHeader("Cache-Control", "no-cache");
 		s.execute();
-		m.addAttribute("employees", s.getEmployees());
-		return "showAllEmployeeMessege";
+		return s.getEmployees();
 	}
 }

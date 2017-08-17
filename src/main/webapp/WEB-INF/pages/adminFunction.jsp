@@ -18,7 +18,7 @@
 		</div>
 		<div>
 			<ul class="nav navbar-nav">
-				<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege">显示所有员工信息</a></li>
+				<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege" id="showAllEmployeeMessege">显示所有员工信息</a></li>
 				<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege"  id="delectemployee">删除员工</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -42,14 +42,27 @@
 		</div>
 	</nav>
 	<nav id="nav"></nav>
-</script>
 <script>
-	$(document).ready(function(){
-			$("#delectemployee").click(function(){
-			$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #formdelect");
-			return false;
-			});
+$(document).ready(function(){
+    $("#showAllEmployeeMessege").click(function(){
+    	$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #allEmployee",function(response,status,xhr){
+    		if(status=="success"){
+    			var tbody=$('#nav table tbody');
+    		    $.getJSON('<%=request.getContextPath()%>/showAllEmployeeMessege',function(json){	            
+    			    for(var i=0;i<json.length;i++){
+    			            addTable(json[i],tbody);
+    			    }
+    	    	});
+    		}	
+    	});
+		return false;
 	});
+});
+	function addTable(employee,tbody){
+		var content="<tr><td>"+employee.empId+"</td><td>"+employee.name+"</td><td>"+employee.address+"</td><td>"+employee.classification.messege+"</td><td>"+employee.method.messege+"</td></tr>";
+		//var content="<tr><td>haha</td></tr>"
+		$(tbody).append(content);
+	}
 	$(document).ready(function(){
   		$("#delectemployee").click(function(){
     		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #formdelect");

@@ -6,8 +6,8 @@ import com.payroll.dao.PayrollSystemDaoImpl;
 
 public abstract class  Transaction {
 	@Autowired
-	protected PayrollSystemDaoImpl database;
-	//ÒªÃ´ÉêÃ÷Òì³£ÒªÃ´´¦ÀíÒì³£
+	PayrollSystemDaoImpl database;
+	//autowired canot be protectedï¼Ÿ
 	public abstract void execute()throws Exception;
 
 }
