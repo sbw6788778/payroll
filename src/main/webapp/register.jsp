@@ -14,42 +14,50 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js" charset="utf-8"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    
   </head>
 
   <body>
 
     <div class="container">
 
-      <form name="form1" class="form-signin" method="post" action="<%=request.getContextPath()%>/Register">
+      <form id="form1" class="form-signin" onsubmit="return PostData()">
         <h2 class="form-signin-heading">新用户注册</h2>
         <label for="inputUsername" class="sr-only">id</label>
         <input type="text" name="id" class="form-control" placeholder="员工号" required autofocus>
-        <label for="inputUsername" class="sr-only">Username</label>
+        <label for="inputUsername" class="sr-only">username</label>
         <input type="text" name="username" class="form-control" placeholder="username" required autofocus>
         <label for="inputUsername" class="sr-only">email</label>
         <input type="text" name="email" class="form-control" placeholder="email" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
+        <label for="inputPassword" class="sr-only">password</label>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="submitRe">注册</button>
       </form>
 
     </div> <!-- /container -->
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  <script>
+  function PostData() {
+      $.ajax({
+          type: "POST",
+          url: "<%=request.getContextPath()%>/Register",
+          async: false,
+          data : $('#form1').serialize(),
+          success: function(msg) {
+        	  if(msg=="success"){
+        		  alert(msg);
+        		  window.location.href='<%=request.getContextPath()%>/index.jsp';
+        	  }
+        	  else{
+        		 alert(msg);
+        		 
+        	  }
+        		  
+          }
+      });
+      return false;
+  }
+  </script>
   </body>
 </html>

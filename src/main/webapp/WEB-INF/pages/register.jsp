@@ -33,7 +33,7 @@
 
     <div class="container">
 
-      <form name="form1" class="form-signin" method="post" action="">
+      <form name="form1" class="form-signin" method="post" action="<%=request.getContextPath()%>/Register">
         <h2 class="form-signin-heading">新用户注册</h2>
         <label for="inputUsername" class="sr-only">id</label>
         <input type="text" name="id" class="form-control" placeholder="员工号" required autofocus>
@@ -52,23 +52,4 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
-</html>
-
-<body>
-	<form action="Register" method="post">
-		员工号:<br>
-		<input type="text" name="id" value="">
-		<br>
- 		用户名:<br>
-		<input type="text" name="username" value="">
-		<br>
- 		密码:<br>
-		<input type="text" name="password" value="">
-		<br>
-		邮箱:<br>
-		<input type="text" name="email" value="">
-		<br>
-		<input type="submit" value="注册">
-	</form> 
-</body>
 </html>

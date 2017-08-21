@@ -15,6 +15,7 @@ import com.payroll.service.BiweeklySchedule;
 import com.payroll.service.CommissionedClassification;
 import com.payroll.service.DirectMethod;
 import com.payroll.service.Employee;
+import com.payroll.service.EmployeeRegisterMessage;
 import com.payroll.service.EmployeeUser;
 import com.payroll.service.HoldMethod;
 import com.payroll.service.HourlyClassification;
@@ -232,15 +233,22 @@ public class PayrollSystemDaoImpl extends SqlSessionDaoSupport implements Payrol
 		m.put("id",memId);m.put("t",sc);
 		session.insert("addServiceCharge",m);
 	}
+	public void AddRegisterMessage(EmployeeRegisterMessage e){
+		SqlSession session=this.getSqlSession();
+		HashMap<String, Object> m=new HashMap();
+		m.put("id",Integer.valueOf(e.getId()));
+		m.put("username",e.getUsername());
+		m.put("password",e.getPassword());
+		m.put("email",e.getPassword());
+		session.insert("addRegisterMessage", m);
+	}
 	public void AddRegisterMessage(int id,String username,String password,String email){
 		SqlSession session=this.getSqlSession();
 		HashMap<String, Object> m=new HashMap();
-		System.out.println(id);
 		m.put("id",Integer.valueOf(id));
 		m.put("username",username);
 		m.put("password",password);
-		m.put("email",email);
-		System.out.println(m.get("id"));
+		m.put("email",password);
 		session.insert("addRegisterMessage", m);
 	}
 	public void deleteMethod(Employee e){
