@@ -41,10 +41,10 @@
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <div class="radio">
           <label>
-            <input name="rdo" type="radio" value="1" onclick="document.form1.action='Login/Admin'"/>管理员
+            <input name="rdo" type="radio" value="1" onclick="document.form1.action='<%=request.getContextPath()%>/Login/Admin'"/>管理员
 		  </label>
 		  <label>
-			<input name="rdo" type="radio" value="1" onclick="document.form1.action='Login/Employee'"/>普通员工
+			<input name="rdo" type="radio" value="1" onclick="document.form1.action='<%=request.getContextPath()%>/Login/Employee'"/>普通员工
           </label>
         </div>
         <a href="<%=request.getContextPath()%>/register.jsp"></a>

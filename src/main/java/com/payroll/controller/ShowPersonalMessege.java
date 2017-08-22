@@ -13,9 +13,9 @@ public class ShowPersonalMessege {
 	@RequestMapping("personalMessege")
 	public String showmessege(HttpServletRequest request,ModelMap m){
 		EmployeeUser u= (EmployeeUser)request.getSession().getAttribute("user");
-		if(u==null) System.out.println("¿ÕµÄ");
+		if(u==null) System.out.println("ï¿½Õµï¿½");
 		u.setEmployeeMessegeAndEmail();
 		m.addAttribute("user", u);
-		return "employeeFunction";
+		return "employeeFunction1";
 	}
 }
