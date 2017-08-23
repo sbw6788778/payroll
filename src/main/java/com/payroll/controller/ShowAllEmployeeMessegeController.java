@@ -19,7 +19,7 @@ public class ShowAllEmployeeMessegeController {
 	ShowAllEmployeeMessegeService s;
 	@RequestMapping("showAllEmployeeMessege")
 	@ResponseBody
-	public List<Employee>  showAllEmployeeMessege(Model m,HttpServletResponse response){
+	public List<Employee>  showAllEmployeeMessege(HttpServletResponse response){
 		response.setHeader("Cache-Control", "no-cache");
 		s.execute();
 		return s.getEmployees();

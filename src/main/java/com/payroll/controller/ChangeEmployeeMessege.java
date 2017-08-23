@@ -50,4 +50,32 @@ public class ChangeEmployeeMessege {
 		bankMethod.execute();
 		return "redirect:/personalMessege";
 	}
+	@RequestMapping(value="userProfile")
+	@ResponseBody
+        public String changeBankMethod(String id,String name,String address,String mailAddress,String bank,String account){
+                if(name!=null){
+			changeName.setId(Integer.valueOf(id));
+        	        changeName.setNewName(name);
+	                changeName.execute();
+
+		}
+		if(address!=null){
+		changeAddress.setId(Integer.valueOf(id));
+                changeAddress.setNewAddress(address);
+               	 changeAddress.execute();
+		}
+		if(mailAddress!=null){
+		mailMethod.setId(Integer.valueOf(id));
+                mailMethod.setAddress(address);
+                mailMethod.execute();
+		}
+		if(bank!=null||account!=null){
+		bankMethod.setId(Integer.valueOf(id));
+                bankMethod.setBank(bank);
+                bankMethod.setAccount(account);
+                bankMethod.execute();
+		}
+                return "redirect:/personalMessege";
+        }
+
 }

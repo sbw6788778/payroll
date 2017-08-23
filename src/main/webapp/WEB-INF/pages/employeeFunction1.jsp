@@ -33,11 +33,11 @@
               
           <ul class="list-group">
             <li class="list-group-item text-muted">Employee Profile</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Eid</strong></span>${user.employeeMessege.empId}</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>username</strong></span> ${user.username}</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Real name</strong></span> ${user.employeeMessege.name}</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Address</strong></span> ${user.employeeMessege.address}</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Employee Classification</strong></span> ${user.employeeMessege.classification.messege}</li>
+            <li class="list-group-item text-right" id="employeeId"><span class="pull-left"><strong>Eid</strong></span></li>
+            <li class="list-group-item text-right" id="employeeUsername"><span class="pull-left"><strong>username</strong></span></li>
+            <li class="list-group-item text-right" id="employeeRealname"><span class="pull-left"><strong>Real name</strong></span></li>
+            <li class="list-group-item text-right" id="employeeAddress"><span class="pull-left"><strong>Address</strong></span></li>
+            <li class="list-group-item text-right" id="employeeClassification"><span class="pull-left"><strong>Employee Classification</strong></span></li>
           </ul> 
                
           <div class="panel panel-default">
@@ -132,12 +132,19 @@
             		
                	
                   <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+                  <form class="form" id="resetPersonalMessageForm" onsubmit="return resetPersonalMessage()">
                       <div class="form-group">
+
+                          <div class="col-xs-6">
+                              <label for="id"><h4>id</h4></label>
+                              <input type="text" class="form-control" name="id" id="id" placeholder="id" title="enter your eid">
+                          </div>
+                      </div
+		      <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="first_name"><h4>real name</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your real name if you want to change.">
+                              <input type="text" class="form-control" name="name" id="first_name" placeholder="first name" title="enter your real name if you want to change.">
                           </div>
                       </div>
                       <div class="form-group">
@@ -154,21 +161,6 @@
 	                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
 	                          
 	                      </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="password"><h4>Password</h4></label>
-                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="password2"><h4>Verify</h4></label>
-                              <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
-                          </div>
-                      </div>
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
@@ -182,6 +174,84 @@
          </div><!--/tab-pane-->
 </div><!--/tab-content-->
 </div>
+<script>
+ $(document).ready(requestEmployeeMessage());
 
+function resetPersonalMessage() {
+      $.ajax({
+          type: "POST",
+          url: "<%=request.getContextPath()%>/change/userProfile",
+          async: false,
+          data : $('#resetPersonalMessageForm').serialize(),
+          success: function(msg) {
+                  if(msg=="success"){
+                          alert("修改成功");
+                  }
+                  else{
+                         alert();
+                         
+                  }
+                          
+          }
+      });
+      return false;
+  }
+
+function requestEmployeeMessage() {
+      $.ajax({
+          type: "GET",
+          url: "<%=request.getContextPath()%>/personalMessege",
+          async: false,
+          success: function(msg) {
+                         loadPersonalMessage(msg); 
+          }
+      });
+      return false;
+  }
+function loadPersonalMessage(employee){
+	$(#employeeId).text(employee.employeeMessege.empId);
+	$(#employeeUsername).text(employee.username);
+	$(#employeeRealname).text(employee.employeeMessege.name);
+	$(#employeeAddress).text(employee.employeeMessege.address);
+	$(#employeeClassification).text(employee.employeeMessege.classification.messege);
+	var classification=employee.employeeMessege.classification.messege;
+	var method=employee.employeeMessege.method.messege;
+	var form=$(#resetPersonalMessageForm); 
+	if(method=="支票邮寄"){
+		var mailAddress="<div class="form-group">
+			  <div class="col-xs-6">
+                              <label for="mailAddress"><h4>Password</h4></label>
+                              <input type="mailAddress" class="form-control" name="mailAddress" id="mailAddress" placeholder="mailAddress" title="enter your mailAddress">
+                          </div>
+                      </div>";
+		$(form).append(mailAddress);
+	}
+	if(method=="存入银行"){
+		var mailAddress="<div class="form-group">
+                          <div class="col-xs-6">
+                              <label for="bank"><h4>Password</h4></label>
+                              <input type="bank" class="form-control" name="bank" id="bank" placeholder="bank" title="enter your bank">
+                          </div>
+                      </div>
+			<div class="form-group">
+                          <div class="col-xs-6">
+                              <label for="account"><h4>Password</h4></label>
+                              <input type="account" class="form-control" name="account" id="account" placeholder="account" title="enter your account">
+                          </div>
+                      </div>
+
+				";
+                $(form).append(mailAddress);
+	}
+	if(classification=="小时工"){
+		$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addTimeCardForm");
+	}
+	else if(classification=="绩效工"){
+		$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addSalesReceiptForm");
+	}
+}
+function AddSalesReceiptForm(){}
+function AddTimeCardForm(){}	
+</script>
 </body>
 </html>
