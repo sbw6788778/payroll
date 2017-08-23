@@ -13,8 +13,8 @@
     <title>员工注册</title>
 
     <!-- Bootstrap core CSS -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js" charset="utf-8"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js" charset="utf-8"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     
   </head>

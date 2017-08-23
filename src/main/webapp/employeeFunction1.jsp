@@ -1,23 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <title>员工登录系统</title>
     <!-- Bootstrap core CSS -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="jumbotron-narrow.css" rel="stylesheet">
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">	
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
   </head>
@@ -139,8 +129,8 @@
                               <label for="id"><h4>id</h4></label>
                               <input type="text" class="form-control" name="id" id="id" placeholder="id" title="enter your eid">
                           </div>
-                      </div
-		      <div class="form-group">
+                      </div>
+		      		  <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="first_name"><h4>real name</h4></label>
@@ -174,84 +164,63 @@
          </div><!--/tab-pane-->
 </div><!--/tab-content-->
 </div>
-<script>
- $(document).ready(requestEmployeeMessage());
-
-function resetPersonalMessage() {
-      $.ajax({
-          type: "POST",
-          url: "<%=request.getContextPath()%>/change/userProfile",
-          async: false,
-          data : $('#resetPersonalMessageForm').serialize(),
-          success: function(msg) {
-                  if(msg=="success"){
-                          alert("修改成功");
-                  }
-                  else{
-                         alert();
-                         
-                  }
-                          
-          }
-      });
-      return false;
-  }
-
-function requestEmployeeMessage() {
-      $.ajax({
-          type: "GET",
-          url: "<%=request.getContextPath()%>/personalMessege",
-          async: false,
-          success: function(msg) {
-                         loadPersonalMessage(msg); 
-          }
-      });
-      return false;
-  }
-function loadPersonalMessage(employee){
-	$(#employeeId).text(employee.employeeMessege.empId);
-	$(#employeeUsername).text(employee.username);
-	$(#employeeRealname).text(employee.employeeMessege.name);
-	$(#employeeAddress).text(employee.employeeMessege.address);
-	$(#employeeClassification).text(employee.employeeMessege.classification.messege);
-	var classification=employee.employeeMessege.classification.messege;
-	var method=employee.employeeMessege.method.messege;
-	var form=$(#resetPersonalMessageForm); 
-	if(method=="支票邮寄"){
-		var mailAddress="<div class="form-group">
-			  <div class="col-xs-6">
-                              <label for="mailAddress"><h4>Password</h4></label>
-                              <input type="mailAddress" class="form-control" name="mailAddress" id="mailAddress" placeholder="mailAddress" title="enter your mailAddress">
-                          </div>
-                      </div>";
-		$(form).append(mailAddress);
-	}
-	if(method=="存入银行"){
-		var mailAddress="<div class="form-group">
-                          <div class="col-xs-6">
-                              <label for="bank"><h4>Password</h4></label>
-                              <input type="bank" class="form-control" name="bank" id="bank" placeholder="bank" title="enter your bank">
-                          </div>
-                      </div>
-			<div class="form-group">
-                          <div class="col-xs-6">
-                              <label for="account"><h4>Password</h4></label>
-                              <input type="account" class="form-control" name="account" id="account" placeholder="account" title="enter your account">
-                          </div>
-                      </div>
-
-				";
-                $(form).append(mailAddress);
-	}
-	if(classification=="小时工"){
-		$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addTimeCardForm");
-	}
-	else if(classification=="绩效工"){
-		$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addSalesReceiptForm");
-	}
-}
-function AddSalesReceiptForm(){}
-function AddTimeCardForm(){}	
-</script>
+	<script>
+		 $(document).ready(function (){
+			 $.ajax({
+		          type: "GET",
+		          url: "<%=request.getContextPath()%>/personalMessege",
+		          async: false,
+		          success: function(msg) {
+		               loadPersonalMessage(msg); 
+		          }
+		      });
+		 });
+	
+		function resetPersonalMessage() {
+		      $.ajax({
+		          type: "POST",
+		          url: "<%=request.getContextPath()%>/change/userProfile",
+		          async: false,
+		          data : $("#resetPersonalMessageForm").serialize(),
+		          success: function(msg) {
+		                  if(msg=="success"){
+		                          alert("修改成功");
+		                  }
+		                  else{
+		                         alert();
+		                         
+		                  }
+		                          
+		          }
+		      });
+		      return false;
+		  }
+		function loadPersonalMessage(employee){
+			$('#employeeId').append('<p>'+employee.employeeMessege.empId+'</p>');
+			$('#employeeUsername').append('<p>'+employee.username+'</p>');
+			$('#employeeRealname').append('<p>'+employee.employeeMessege.name+'</p>');
+			$('#employeeAddress').append('<p>'+employee.employeeMessege.address+'</p>');
+			$('#employeeClassification').append('<p>'+employee.employeeMessege.classification.messege+'</p>');
+			var classification=employee.employeeMessege.classification.messege;
+			var method=employee.employeeMessege.method.messege;
+			var form=$('#resetPersonalMessageForm'); 
+			if(method=="支票邮寄"){
+				var mailAddress="<div class=\"form-group\"><div class=\"col-xs-6\"><label for=\"mailAddress\"><h4>Password</h4></label><input type=\"mailAddress\" class=\"form-control\" name=\"mailAddress\" id=\"mailAddress\" placeholder=\"mailAddress\" title=\"enter your mailAddress\"></div></div>";
+				$(form).append(mailAddress);
+			}
+			if(method=="存入银行"){
+				var mailAddress="<div class=\"form-group\"><div class=\"col-xs-6\"><label for=\"bank\"><h4>Password</h4></label><input type=\"bank\" class=\"form-control\" name=\"bank\" id=\"bank\" placeholder=\"bank\" title=\"enter your bank\"></div></div><div class=\"form-group\"><div class=\"col-xs-6\"><label for=\"account\"><h4>Password</h4></label><input type=\"account\" class=\"form-control\" name=\"account\" id=\"account\" placeholder=\"account\" title=\"enter your account\"></div></div>";
+		                $(form).append(mailAddress);
+			}
+			if(classification=="小时工"){
+				$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addTimeCardForm");
+			}
+			else if(classification=="绩效工"){
+				$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addSalesReceiptForm");
+			}
+		}
+		function AddSalesReceiptForm(){}
+		function AddTimeCardForm(){}	
+	</script>
 </body>
 </html>

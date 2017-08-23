@@ -40,7 +40,7 @@ public class LoginController {
 		String result=u.EmployeeVerification();
 		if(result.equals("验证成功")){
 			request.getSession().setAttribute("user", u);
-			return "redirect:/personalMessege";
+			return "redirect:/employeeFunction1.jsp";
 		}
 		else if(result.equals("验证失败")){
 			return "index";
