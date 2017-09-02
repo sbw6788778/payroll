@@ -1,13 +1,18 @@
 package com.payroll.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.payroll.service.ChangeAddressTransaction;
 import com.payroll.service.ChangeDirectTransaction;
 import com.payroll.service.ChangeMailTransaction;
 import com.payroll.service.ChangeNameTransaction;
+import com.payroll.service.Employee;
+import com.payroll.service.EmployeeUser;
 
 @Controller
 @RequestMapping("change")
@@ -52,30 +57,35 @@ public class ChangeEmployeeMessege {
 	}
 	@RequestMapping(value="userProfile")
 	@ResponseBody
-        public String changeBankMethod(String id,String name,String address,String mailAddress,String bank,String account){
-                if(name!=null){
-			changeName.setId(Integer.valueOf(id));
+        public String changeBankMethod(HttpServletRequest req,String name,String address,String mailAddress,String bank,String account){
+		EmployeeUser user= (EmployeeUser)(req.getSession().getAttribute("user"));
+		if(user==null){
+			return "fail";
+		}
+		int eid=user.getEmployeeMessege().getEmpId();
+		if(!name.equals("")){
+                	changeName.setId(eid);
         	        changeName.setNewName(name);
 	                changeName.execute();
 
 		}
-		if(address!=null){
-		changeAddress.setId(Integer.valueOf(id));
+		if(!address.equals("")){
+				changeAddress.setId(eid);
                 changeAddress.setNewAddress(address);
                	 changeAddress.execute();
 		}
-		if(mailAddress!=null){
-		mailMethod.setId(Integer.valueOf(id));
-                mailMethod.setAddress(address);
+		if(mailAddress!=null&&!mailAddress.equals("")){
+				mailMethod.setId(eid);
+                mailMethod.setAddress(mailAddress);
                 mailMethod.execute();
 		}
-		if(bank!=null||account!=null){
-		bankMethod.setId(Integer.valueOf(id));
+		if(bank!=null&&(!bank.equals(""))||(account!=null&&!account.equals(""))){
+				bankMethod.setId(eid);
                 bankMethod.setBank(bank);
                 bankMethod.setAccount(account);
                 bankMethod.execute();
 		}
-                return "redirect:/personalMessege";
+                return "success";
         }
 
 }

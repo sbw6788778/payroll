@@ -45,7 +45,7 @@
 <script>
 $(document).ready(function(){
     $("#showAllEmployeeMessege").click(function(){
-    	$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #allEmployee",function(response,status,xhr){
+    	$("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #allEmployee",function(response,status,xhr){
     		if(status=="success"){
     			var tbody=$('#nav table tbody');
     		    $.getJSON('<%=request.getContextPath()%>/showAllEmployeeMessege',function(json){	            
@@ -65,25 +65,25 @@ $(document).ready(function(){
 	}
 	$(document).ready(function(){
   		$("#delectemployee").click(function(){
-    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #formdelect");
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #formdelect");
     		return false;
   		});
 	});
 	$(document).ready(function(){
   		$("#addhourlyemployee").click(function(){
-    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #addhourlyemployeeform");
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #addhourlyemployeeform");
     		return false;
   		});
 	});
 	$(document).ready(function(){
   		$("#addsalaryemployee").click(function(){
-    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #addsalaryemployeeform");
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #addsalaryemployeeform");
     		return false;
   		});
 	});
 	$(document).ready(function(){
   		$("#addcommissionemployee").click(function(){
-    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.html #addcommissionemployeeform");
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #addcommissionemployeeform");
     		return false;
   		});
 	});

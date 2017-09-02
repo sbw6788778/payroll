@@ -4,6 +4,11 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>员工登录系统</title>
     <!-- Bootstrap core CSS -->
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -49,7 +54,7 @@
           
           <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-            <li><a href="#messages" data-toggle="tab">Messages</a></li>
+            <li><a href="#messages" data-toggle="tab" id="addTimeCardOrReceipt">Messages</a></li>
             <li><a href="#settings" data-toggle="tab">Settings</a></li>
           </ul>
               
@@ -123,13 +128,13 @@
                	
                   <hr>
                   <form class="form" id="resetPersonalMessageForm" onsubmit="return resetPersonalMessage()">
-                      <div class="form-group">
+<!--                       <div class="form-group"> -->
 
-                          <div class="col-xs-6">
-                              <label for="id"><h4>id</h4></label>
-                              <input type="text" class="form-control" name="id" id="id" placeholder="id" title="enter your eid">
-                          </div>
-                      </div>
+<!--                           <div class="col-xs-6"> -->
+<!--                               <label for="id"><h4>id</h4></label> -->
+<!--                               <input type="text" class="form-control" name="id" id="id" placeholder="id" title="enter your eid"> -->
+<!--                           </div> -->
+<!--                       </div> -->
 		      		  <div class="form-group">
                           
                           <div class="col-xs-6">
@@ -145,12 +150,42 @@
                           </div>
                       </div>
          
-                      <div class="form-group">  
-	                      <div class="col-xs-6">
-	                              <label for="email"><h4>Email</h4></label>
-	                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+<!--                       <div class="form-group">   -->
+<!-- 	                      <div class="col-xs-6"> -->
+<!-- 	                              <label for="email"><h4>Email</h4></label> -->
+<!-- 	                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email."> -->
+	                          
+<!-- 	                      </div> -->
+<!--                       </div> -->
+                      <div class="form-group"> 
+	                      <label class="radio-inline">
+						  <input type="radio" name="inlineRadioOptions" id="ri" value="mailMethod"> mailMethod
+						  </label>
+						  <label class="radio-inline">
+						  <input type="radio" name="inlineRadioOptions" id="r" value="directMethod">directMethod
+						  </label>
+             		 </div>
+                      <div class="form-group" id="mailAddress">  
+	                      <div class="col-xs-6" >
+	                              <label for="mailAddress"><h4>mailAddress</h4></label>
+	                              <input type="mailAddress" class="form-control" name="mailAddress" id="mailAddress" placeholder="you@email.com" title="enter your mailAddress.">
 	                          
 	                      </div>
+                      </div>
+                      <div class="form-group" id="bank">  
+	                      <div class="col-xs-6">
+	                              <label for="bank"><h4>bank</h4></label>
+	                              <input type="bank" class="form-control" name="bank" id="bank" placeholder="bank" title="enter bank.">
+	                          
+	                      </div>
+                      </div>
+                      <div class="form-group visible_md" id="account">  
+	                      <div class="col-xs-6">
+	                              <label for="account"><h4>account</h4></label>
+	                              <input type="account" class="form-control" name="account" id="account" placeholder="account" title="enter account">
+	                          
+	                      </div>
+                      </div>
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
@@ -187,8 +222,8 @@
 		                          alert("修改成功");
 		                  }
 		                  else{
-		                         alert();
-		                         
+		                         alert("异常，请重新登陆");
+		                         window.location.href='<%=request.getContextPath()%>/index.jsp';
 		                  }
 		                          
 		          }
@@ -204,23 +239,72 @@
 			var classification=employee.employeeMessege.classification.messege;
 			var method=employee.employeeMessege.method.messege;
 			var form=$('#resetPersonalMessageForm'); 
-			if(method=="支票邮寄"){
-				var mailAddress="<div class=\"form-group\"><div class=\"col-xs-6\"><label for=\"mailAddress\"><h4>Password</h4></label><input type=\"mailAddress\" class=\"form-control\" name=\"mailAddress\" id=\"mailAddress\" placeholder=\"mailAddress\" title=\"enter your mailAddress\"></div></div>";
-				$(form).append(mailAddress);
-			}
-			if(method=="存入银行"){
-				var mailAddress="<div class=\"form-group\"><div class=\"col-xs-6\"><label for=\"bank\"><h4>Password</h4></label><input type=\"bank\" class=\"form-control\" name=\"bank\" id=\"bank\" placeholder=\"bank\" title=\"enter your bank\"></div></div><div class=\"form-group\"><div class=\"col-xs-6\"><label for=\"account\"><h4>Password</h4></label><input type=\"account\" class=\"form-control\" name=\"account\" id=\"account\" placeholder=\"account\" title=\"enter your account\"></div></div>";
-		                $(form).append(mailAddress);
-			}
 			if(classification=="小时工"){
-				$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addTimeCardForm");
+				$("#messages").load("<%=request.getContextPath()%>/commonHtml.jsp #addTimeCardForm");
+				$("#addTimeCardOrReceipt").text("addTimeCard");
 			}
 			else if(classification=="绩效工"){
-				$("#messages").load("<%=request.getContextPath()%>/commonHtml.html #addSalesReceiptForm");
+				$("#messages").load("<%=request.getContextPath()%>/commonHtml.jsp #addSalesReceiptForm");
+				$("#addTimeCardOrReceipt").text("addSalesReceipt");
 			}
 		}
-		function AddSalesReceiptForm(){}
-		function AddTimeCardForm(){}	
+		function AddSalesReceiptForm(){
+			$.ajax({
+		          type: "POST",
+		          url: "<%=request.getContextPath()%>/addSalesReceipt",
+		          async: false,
+		          data : $("#AddSalesReceiptForm").serialize(),
+		          success: function(msg) {
+		                  if(msg=="success"){
+		                          alert("修改成功");
+		                  }
+		                  else{
+		                         alert("异常，请重新登陆");
+		                         window.location.href='<%=request.getContextPath()%>/index.jsp';
+		                  }
+		                          
+		          }
+		      });
+		      return false;
+		}
+		function addTimeCardForm(){
+			$.ajax({
+		          type: "POST",
+		          url: "<%=request.getContextPath()%>/addTimeCard",
+		          async: false,
+		          data : $("#addTimeCardForm").serialize(),
+		          success: function(msg) {
+		                  if(msg=="success"){
+		                          alert("修改成功");
+		                  }
+		                  else{
+		                         alert("异常，请重新登陆");
+		                         window.location.href='<%=request.getContextPath()%>/index.jsp';
+		                  }
+		                          
+		          }
+		      });
+		      return false;
+		}	
+		$(function(){
+			$('#mailAddress').hide();
+			$('#bank').hide();
+			$('#account').hide();
+			$("#ri").on('click',function(){
+				$('#mailAddress').show();
+				$('#bank').hide();
+				$('#account').hide();
+			});
+			$("#r").on('click',function(){
+				$('#mailAddress').hide();
+				$('#bank').show();
+				$('#account').show();
+			});
+		});
+		function showDirectMethod(){
+			$("#bank")
+			$("#account")
+		}
 	</script>
 </body>
 </html>
