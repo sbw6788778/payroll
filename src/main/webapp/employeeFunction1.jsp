@@ -301,10 +301,6 @@
 				$('#account').show();
 			});
 		});
-		function showDirectMethod(){
-			$("#bank")
-			$("#account")
-		}
 	</script>
 </body>
 </html>

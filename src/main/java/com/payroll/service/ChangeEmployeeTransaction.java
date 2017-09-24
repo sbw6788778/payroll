@@ -14,6 +14,8 @@ public abstract class ChangeEmployeeTransaction extends Transaction {
 	@Override
 	public void execute(){
 		Employee e=database.GetEmployee(id);
+		if(e==null)
+			return;
 		change(e);
 	}
 	public int getId() {

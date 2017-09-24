@@ -31,6 +31,7 @@
 						<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege"  id="addcommissionemployee">增加绩效工</a></li>
 					</ul>
 				</li>
+				<li><a href="<%=request.getContextPath()%>/showAllEmployeeMessege"  id="changeEmployeeClassification">修改员工类型</a></li>
 			</ul>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
@@ -87,6 +88,102 @@ $(document).ready(function(){
     		return false;
   		});
 	});
+	$(document).ready(function(){
+  		$("#changeEmployeeClassification").click(function(){
+    		$("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #changeEmployeeClassificationForm");
+    		return false;
+  		});
+	});
+	function searchEmployeeById(){
+		$.ajax({
+	          type: "GET",
+	          url: "<%=request.getContextPath()%>/employees/",
+	          async: false,
+	          data : $("#changeEmployeeClassificationForm").serialize(),
+	          success: function(msg) {
+	                  if(msg==''){
+	                          alert("没有这个员工，请重新输入");
+	                  }
+	                  else{
+	                         var employee=msg;
+	                         var button1="<button class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#myModalHourly\">修改为小时工</button>"
+		                         var button2="<button class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#myModalCommission\">修改为绩效工</button>"
+		                         var button3="<button class=\"btn btn-default btn-sm\" data-toggle=\"modal\" data-target=\"#myModalSalary\">修改为领月薪员工</button>"
+	                         $("#nav").load("<%=request.getContextPath()%>/commonHtml.jsp #change",function(){
+	                     			var tbody=$('#nav #change table tbody');
+	                     			addTable(employee,tbody);
+	                     			if(employee.classification.messege=="小时工"){
+	   	                        	 $("#nav").append(button2);
+	   	                        	 $("#nav").append(button3);
+	   	            
+	   	                         }else if(employee.classification.messege=="编制员工"){
+	   	                        	 $("#nav").append(button1);
+	   	                        	 $("#nav").append(button2);
+	   	                         }else{
+	   	                        	 $("#nav").append(button1);
+	   	                        	 $("#nav").append(button3);
+	   	                         }
+	                     	});
+	                  }
+	                          
+	          }
+	      });
+	      return false;
+	}
+	function changeClassification(){
+		$.ajax({
+	          type: "POST",
+	          url: "<%=request.getContextPath()%>/changeClassification/toHourlyClassification",
+	          async: false,
+	          data : $("#form1").serialize(),
+	          success: function(msg) {
+	                  if(msg=='success'){
+	                         alert("修改成功");
+	                  }
+	                  else{
+	                	  alert("修改失败")
+	                  }
+	                          
+	          }
+	      });
+	      return false; 
+	}
+	function changeClassification2(){
+		$.ajax({
+	          type: "POST",
+	          url: "<%=request.getContextPath()%>/changeClassification/toSalariedClassification",
+	          async: false,
+	          data : $("#form2").serialize(),
+	          success: function(msg) {
+	                  if(msg=='success'){
+	                         alert("修改成功");
+	                  }
+	                  else{
+	                	  alert("修改失败")
+	                  }
+	                          
+	          }
+	      });
+	      return false; 
+	}
+	function changeClassification3(){
+		$.ajax({
+	          type: "POST",
+	          url: "<%=request.getContextPath()%>/changeClassification/toCommissionedClassification",
+	          async: false,
+	          data : $("#form3").serialize(),
+	          success: function(msg) {
+	                  if(msg=='success'){
+	                         alert("修改成功");
+	                  }
+	                  else{
+	                	  alert("修改失败")
+	                  }
+	                          
+	          }
+	      });
+	      return false; 
+	}
 </script>	 
 </body>
 </html>

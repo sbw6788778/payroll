@@ -5,6 +5,6 @@ public abstract class ChangeMethodTransaction extends ChangeEmployeeTransaction 
 		e.setMethod(getMethod());
 		database.changeMethod(e);
 	}
-	//要变成什么样？没输入啊
+
 	protected abstract PaymentMethod getMethod();
 }
