@@ -34,7 +34,7 @@ public class LoginController {
 		}
 	}
 	@RequestMapping(value="/Employee")
-	public String loginEmployee(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("password") String password,ModelMap m){
+	public String loginEmployee(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("password") String password){
 		u.setUsername(username);
 		u.setPassword(password);
 		String result=u.EmployeeVerification();

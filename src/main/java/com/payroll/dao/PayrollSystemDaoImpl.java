@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Set;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.payroll.redisCache.redisDao;
 import com.payroll.service.BiweeklySchedule;
 import com.payroll.service.CommissionedClassification;
 import com.payroll.service.DirectMethod;
@@ -30,8 +32,8 @@ import com.payroll.service.TimeCard;
 import com.payroll.service.UnionAffiliation;
 import com.payroll.service.WeeklySchedule;
 public class PayrollSystemDaoImpl extends SqlSessionDaoSupport implements PayrollSystemDao {
-
-	
+	@Autowired
+	redisDao redisCache;
 	public void AddEmployee(int id, Employee employee) {
 		// TODO Auto-generated method stub
 		SqlSession session=this.getSqlSession();
@@ -66,16 +68,21 @@ public class PayrollSystemDaoImpl extends SqlSessionDaoSupport implements Payrol
 	}
 	
 	public Employee GetEmployee(int id){
-		SqlSession session=this.getSqlSession();
-		Employee e=session.selectOne("GetEmployee", id);
-		if(e==null) return null;
-		loadSchedule(e,session);
-		loadPaymentMethodTable(e,session);
-		loadTimeCard(e,session);
-		loadSalesreceipt(e,session);
-		loadAffiliation(e,session);
-		loadServiceCharge(e,session);
-		return e;
+		EmployeeUser employeeCache=redisCache.getEmployee(id);
+		if(employeeCache!=null){
+			return employeeCache.getEmployeeMessege();
+		}else{
+			SqlSession session=this.getSqlSession();
+			Employee e=session.selectOne("GetEmployee", id);
+			if(e==null) return null;
+			loadSchedule(e,session);
+			loadPaymentMethodTable(e,session);
+			loadTimeCard(e,session);
+			loadSalesreceipt(e,session);
+			loadAffiliation(e,session);
+			loadServiceCharge(e,session);
+			return e;
+		}
 	 }
 	private void loadServiceCharge(Employee e,SqlSession session){
 		if(e.getAffiliation() instanceof UnionAffiliation) {
