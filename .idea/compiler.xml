@@ -6,11 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="payroll" />
+        <module name="payroll_data" />
+        <module name="payroll_openAPI" />
+        <module name="payroll_service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="payroll" target="1.5" />
+      <module name="payroll_data" target="1.5" />
+      <module name="payroll_openAPI" target="1.5" />
+      <module name="payroll_service" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

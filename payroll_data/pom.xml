@@ -8,8 +8,66 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>com.payroll.dao</groupId>
     <artifactId>payroll_data</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- spring版本号 -->
+        <spring.version>4.0.5.RELEASE</spring.version>
+        <!-- mybatis版本号 -->
+        <mybatis.version>3.4.4</mybatis.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.payroll.service</groupId>
+            <artifactId>payroll_service</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <!-- mybatis核心包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <!-- mybatis/spring包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.8</version>
+        </dependency>
+        <!-- redis cache -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.8.6.RELEASE</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
