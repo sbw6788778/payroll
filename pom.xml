@@ -3,9 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sbw</groupId>
   <artifactId>payroll</artifactId>
-  <packaging>war</packaging>
+  <packaging>pom</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>payroll Maven Webapp</name>
+    <modules>
+        <module>payroll_data</module>
+        <module>payroll_openAPI</module>
+        <module>payroll_service</module>
+    </modules>
+    <name>payroll Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>  
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  

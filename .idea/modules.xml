@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/payroll.iml" filepath="$PROJECT_DIR$/payroll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payroll_data/payroll_data.iml" filepath="$PROJECT_DIR$/payroll_data/payroll_data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payroll_openAPI/payroll_openAPI.iml" filepath="$PROJECT_DIR$/payroll_openAPI/payroll_openAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payroll_service/payroll_service.iml" filepath="$PROJECT_DIR$/payroll_service/payroll_service.iml" />
+    </modules>
+  </component>
+</project>
