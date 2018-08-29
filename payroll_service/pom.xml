@@ -4,18 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>payroll</artifactId>
-        <groupId>com.sbw</groupId>
+        <groupId>com.payroll</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.payroll.service</groupId>
     <artifactId>payroll_service</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>com.payroll.dao</groupId>
+            <groupId>com.payroll</groupId>
             <artifactId>payroll_data</artifactId>
-            <version>4.0.0</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
