@@ -9,7 +9,7 @@
 
           http://www.apache.org/licenses/LICENSE-2.0
 
-       Unless required by applicable law or agreed to in writing, software
+       Unless required by applicable law or agre   ed to in writing, software
        distributed under the License is distributed on an "AS IS" BASIS,
        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
        See the License for the specific language governing permissions and
@@ -17,157 +17,158 @@
 
 -->
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="payrollSystem">
-<!-- 添加员工-（保存支付方式和员工类型的信息） -->
-  <insert id="addEmployee" parameterType="com.payroll.service.Employee">
+    <!-- 添加员工-（保存支付方式和员工类型的信息） -->
+    <insert id="addEmployee" parameterType="com.payroll.service.Employee">
     INSERT INTO employee (EmpId,Name,Address,ScheduleType,PaymentMethodType,PaymentClassificationType)
 		VALUES(#{EmpId},#{Name},#{Address},#{schedule.messege},#{method.messege},#{classification.messege})
   </insert>
-  <insert id="saveDirectMethod" parameterType="com.payroll.service.Employee">
-    INSERT INTO directdepositaccount (EmpId,Bank,Account) VALUES(#{EmpId},#{method.bank},#{method.account})
+    <insert id="saveDirectMethod" parameterType="com.payroll.service.Employee">
+    INSERT INTO bank_account (EmpId,Bank,Account) VALUES(#{EmpId},#{method.bank},#{method.account})
   </insert>
-  <insert id="saveMailMethod" parameterType="com.payroll.service.Employee">
-    INSERT INTO paycheckaddress (EmpId,Address) VALUES(#{EmpId},#{method.address})
+    <insert id="saveMailMethod" parameterType="com.payroll.service.Employee">
+    INSERT INTO paycheck_address (EmpId,Address) VALUES(#{EmpId},#{method.address})
   </insert>
-  <insert id="saveHourlyClassification" parameterType="com.payroll.service.Employee">
-    INSERT INTO hourlyclassification (EmpId,HourlyRate) VALUES(#{EmpId},#{classification.HourlyRate})
+    <insert id="saveHourlyClassification" parameterType="com.payroll.service.Employee">
+    INSERT INTO hourly_classification (EmpId,HourlyRate) VALUES(#{EmpId},#{classification.HourlyRate})
   </insert>
-  <insert id="saveSalariedClassification" parameterType="com.payroll.service.Employee">
-    INSERT INTO salariedclassification (EmpId,MonthlyPay) VALUES(#{EmpId},#{classification.MonthlyPay})
+    <insert id="saveSalariedClassification" parameterType="com.payroll.service.Employee">
+    INSERT INTO salaried_classification (EmpId,MonthlyPay) VALUES(#{EmpId},#{classification.MonthlyPay})
   </insert>
-  <insert id="saveCommissionedClassification" parameterType="com.payroll.service.Employee">
-    INSERT INTO commissionedclassification (EmpId,BasePay,CommissionRate) VALUES(#{EmpId},#{classification.BasePay},#{classification.CommissionRate})
+    <insert id="saveCommissionedClassification" parameterType="com.payroll.service.Employee">
+    INSERT INTO commissioned_classification (EmpId,BasePay,CommissionRate) VALUES(#{EmpId},#{classification.BasePay},#{classification.CommissionRate})
   </insert>
-  <!-- 加载员工类 -->
-  <select id="GetEmployee" parameterType="int" resultType="com.payroll.service.Employee">
+    <!-- 加载员工类 -->
+    <select id="GetEmployee" parameterType="int" resultType="com.payroll.service.Employee">
   	SELECT EmpId,Name,Address FROM employee WHERE EmpId=#{id}
   </select>
-  <!-- 加载工会账单 -->
-  <select id="loadServiceCharge" parameterType="int" resultType="com.payroll.service.ServiceCharge">
-  	SELECT Date,Amount FROM servicecharge WHERE AffiliationId=#{memId}
+    <!-- 加载工会账单 -->
+    <select id="loadServiceCharge" parameterType="int" resultType="com.payroll.service.ServiceCharge">
+  	SELECT Date,Amount FROM union_service_fee WHERE AffiliationId=#{memId}
   </select>
-  <!-- 加载工会事务 -->
-  <select id="loadAffiliation" parameterType="int" resultType="Integer">
-  	SELECT AffiliationId FROM employeeaffiliation WHERE EmpId=#{id}
+    <!-- 加载工会事务 -->
+    <select id="loadAffiliation" parameterType="int" resultType="Integer">
+  	SELECT AffiliationId FROM affiliationId_map WHERE EmpId=#{id}
   </select>
-   <select id="loadAffiliationDues" parameterType="int" resultType="double">
-  	SELECT Dues FROM affiliation WHERE Id=#{affiliationId}
+    <select id="loadAffiliationDues" parameterType="int" resultType="double">
+  	SELECT Dues FROM affiliation_fee WHERE Id=#{affiliationId}
   </select>
-  <!-- 加载销售记录 -->
-  <select id="loadSalesreceipt" parameterType="int" resultType="com.payroll.service.SalesReceipt">
-  	SELECT * FROM salesreceipt WHERE EmpId=#{id}
+    <!-- 加载销售记录 -->
+    <select id="loadSalesreceipt" parameterType="int" resultType="com.payroll.service.SalesReceipt">
+  	SELECT * FROM sales_receipt WHERE EmpId=#{id}
   </select>
-  <!-- 加载时间表 -->
-  <select id="loadTimeCard" parameterType="int" resultType="com.payroll.service.TimeCard">
-  	SELECT * FROM timecard WHERE EmpId=#{id}
+    <!-- 加载时间表 -->
+    <select id="loadTimeCard" parameterType="int" resultType="com.payroll.service.TimeCard">
+  	SELECT * FROM time_card WHERE EmpId=#{id}
   </select>
-  <!-- 加载工资支付周期 -->
-  <select id="loadSchedule" parameterType="int" resultType="String">
+    <!-- 加载工资支付周期 -->
+    <select id="loadSchedule" parameterType="int" resultType="String">
   	SELECT ScheduleType FROM employee WHERE EmpId=#{id}
   </select>
-  <!-- 加载小时工员工类型信息 -->
-  <select id="loadHourlyClassification" parameterType="int" resultType="com.payroll.service.HourlyClassification">
-  	SELECT * FROM hourlyclassification WHERE EmpId=#{id}
+    <!-- 加载小时工员工类型信息 -->
+    <select id="loadHourlyClassification" parameterType="int" resultType="com.payroll.service.HourlyClassification">
+  	SELECT * FROM hourly_classification WHERE EmpId=#{id}
   </select>
-  <!-- 加载绩效员工类型信息 -->
-  <select id="loadCommissionedClassification" parameterType="int" resultType="com.payroll.service.CommissionedClassification">
-  	SELECT * FROM commissionedclassification WHERE EmpId=#{id}
+    <!-- 加载绩效员工类型信息 -->
+    <select id="loadCommissionedClassification" parameterType="int"
+            resultType="com.payroll.service.CommissionedClassification">
+  	SELECT * FROM commissioned_classification WHERE EmpId=#{id}
   </select>
-  <!-- 加载正式工员工类型信息 -->
-  <select id="loadSalariedClassification" parameterType="int" resultType="com.payroll.service.SalariedClassification">
-  	SELECT * FROM salariedclassification WHERE EmpId=#{id}
+    <!-- 加载正式工员工类型信息 -->
+    <select id="loadSalariedClassification" parameterType="int" resultType="com.payroll.service.SalariedClassification">
+  	SELECT * FROM salaried_classification WHERE EmpId=#{id}
   </select>
-  <!-- 加载支付方式 -->
-  <select id="loadPaymentMethod" parameterType="int" resultType="String">
+    <!-- 加载支付方式 -->
+    <select id="loadPaymentMethod" parameterType="int" resultType="String">
   	SELECT PaymentMethodType FROM employee WHERE EmpId=#{id}
   </select>
-  <!-- 加载DirectMethod -->
-  <select id="loadDirectMethod" parameterType="int" resultType="com.payroll.service.DirectMethod">
-  	SELECT Bank,Account FROM directdepositaccount WHERE EmpId=#{id}
+    <!-- 加载DirectMethod -->
+    <select id="loadDirectMethod" parameterType="int" resultType="com.payroll.service.DirectMethod">
+  	SELECT Bank,Account FROM bank_account WHERE EmpId=#{id}
   </select>
-  <!-- 加载MailMethod -->
-  <select id="loadMailMethod" parameterType="int" resultType="com.payroll.service.MailMethod">
-  	SELECT Address FROM paycheckaddress WHERE EmpId=#{id}
+    <!-- 加载MailMethod -->
+    <select id="loadMailMethod" parameterType="int" resultType="com.payroll.service.MailMethod">
+  	SELECT Address FROM paycheck_address WHERE EmpId=#{id}
   </select>
-  <!-- 删除员工 -->
-  <delete id="deleteEmployee" parameterType="int">
+    <!-- 删除员工 -->
+    <delete id="deleteEmployee" parameterType="int">
   	DELETE FROM employee WHERE EmpId=#{id}
   </delete>
-  <!-- getUnionMember -->
-  <select id="getUnionMember" parameterType="int" resultType="int">
-  	SELECT EmpId FROM employeeaffiliation WHERE AffiliationId=#{memid}
+    <!-- getUnionMember -->
+    <select id="getUnionMember" parameterType="int" resultType="int">
+  	SELECT EmpId FROM affiliationId_map WHERE AffiliationId=#{memid}
   </select>
-  <!-- addUnionMember -->
-  <insert id="addUnionMember" parameterType="hashmap">
+    <!-- addUnionMember -->
+    <insert id="addUnionMember" parameterType="hashmap">
     begin;
-    INSERT INTO affiliation(Id,Dues) VALUES (#{memId},#{dues});
-    INSERT INTO employeeaffiliation(EmpId,AffiliationId) VALUES(#{id},#{memId});
+    INSERT INTO affiliation_fee(Id,Dues) VALUES (#{memId},#{dues});
+    INSERT INTO affiliationId_map(EmpId,AffiliationId) VALUES(#{id},#{memId});
     commit;
   </insert>
-  <!-- removeUnionMember -->
-  <delete id="removeUnionMember" parameterType="int">
-  	DELETE FROM affiliation WHERE Id=#{memId}
+    <!-- removeUnionMember -->
+    <delete id="removeUnionMember" parameterType="int">
+  	DELETE FROM affiliation_fee WHERE Id=#{memId}
   </delete>
-  <!-- getAllEmployeeIds -->
-  <select id="getAllEmployeeIds" resultType="int">
+    <!-- getAllEmployeeIds -->
+    <select id="getAllEmployeeIds" resultType="int">
   	SELECT EmpId FROM employee
   </select>
-  <!-- addTimeCard -->
-  <insert id="addTimeCard" parameterType="hashmap">
-    INSERT INTO timecard (Empid,Date,Hours) VALUES (#{id},#{t.Date},#{t.Hours})
+    <!-- addTimeCard -->
+    <insert id="addTimeCard" parameterType="hashmap">
+    INSERT INTO time_card (Empid,Date,Hours) VALUES (#{id},#{t.Date},#{t.Hours})
   </insert>
-  <!-- addSalesReceipt -->
-  <insert id="addSalesReceipt" parameterType="hashmap">
-    INSERT INTO salesreceipt (Empid,Date,Amount) VALUES (#{id},#{t.Date},#{t.Amount})
+    <!-- addSalesReceipt -->
+    <insert id="addSalesReceipt" parameterType="hashmap">
+    INSERT INTO sales_receipt (Empid,Date,Amount) VALUES (#{id},#{t.Date},#{t.Amount})
   </insert>
-  <!-- addSalesReceipt -->
-  <insert id="addServiceCharge" parameterType="hashmap">
-    INSERT INTO servicecharge (AffiliationId,Date,Amount) VALUES (#{id},#{t.Date},#{t.Amount})
+    <!-- addSalesReceipt -->
+    <insert id="addServiceCharge" parameterType="hashmap">
+    INSERT INTO union_service_fee (AffiliationId,Date,Amount) VALUES (#{id},#{t.Date},#{t.Amount})
   </insert>
-  <!-- changeAddress-->
-  <update id="changeAddress" parameterType="hashmap">
+    <!-- changeAddress-->
+    <update id="changeAddress" parameterType="hashmap">
   	UPDATE employee SET Address=#{address} WHERE EmpId=#{id}
   </update>
     <!-- changeName-->
-  <update id="changeName" parameterType="hashmap">
+    <update id="changeName" parameterType="hashmap">
   	UPDATE employee SET Name=#{name} WHERE EmpId=#{id}
   </update>
     <!-- changeMethod-->
-  <update id="changeMethod" parameterType="hashmap">
+    <update id="changeMethod" parameterType="hashmap">
   	UPDATE employee SET PaymentMethodType=#{method} WHERE EmpId=#{id}
   </update>
     <!-- addRegisterMessage -->
-  <insert id="addRegisterMessage" parameterType="Map">
-    INSERT INTO employeeloginmessage (EmpId,Username,Password,Email) VALUES(#{id},#{username},#{password},#{email})
+    <insert id="addRegisterMessage" parameterType="Map">
+    INSERT INTO employee_login_message (EmpId,Username,Password,Email) VALUES(#{id},#{username},#{password},#{email})
   </insert>
-  <!-- deleteMethod -->
-  <delete id="deleteMethod" parameterType="int">
+    <!-- deleteMethod -->
+    <delete id="deleteMethod" parameterType="int">
     begin;
-  	DELETE FROM paycheckaddress WHERE EmpId=#{id};
-  	DELETE FROM directdepositaccount WHERE EmpId=#{id};
+  	DELETE FROM paycheck_address WHERE EmpId=#{id};
+  	DELETE FROM bank_account WHERE EmpId=#{id};
   	commit;
   </delete>
-  <!-- loginEmployeeVerification -->
-  <select id="loginEmployeeVerification" parameterType="String" resultType="String">
-  	SELECT Password FROM employeeloginmessage WHERE Username=#{username}
+    <!-- loginEmployeeVerification -->
+    <select id="loginEmployeeVerification" parameterType="String" resultType="String">
+  	SELECT Password FROM employee_login_message WHERE Username=#{username}
   </select>
-  <!-- loginEmployeeVerification -->
-  <select id="loginAdminVerification" parameterType="String" resultType="String">
-  	SELECT Password FROM adminloginmessage WHERE Username=#{username}
+    <!-- loginEmployeeVerification -->
+    <select id="loginAdminVerification" parameterType="String" resultType="String">
+  	SELECT Password FROM admin_login_message WHERE Username=#{username}
   </select>
-   <!-- getIdByUsername-->
-  <select id="getIdByUsername" parameterType="String" resultType="Integer">
-  	SELECT EmpId FROM employeeloginmessage WHERE Username=#{username}
+    <!-- getIdByUsername-->
+    <select id="getIdByUsername" parameterType="String" resultType="Integer">
+  	SELECT EmpId FROM employee_login_message WHERE Username=#{username}
   </select>
-   <!-- getEmailById-->
-  <select id="getEmailById" parameterType="int" resultType="String">
-  	SELECT Email FROM employeeloginmessage WHERE EmpId=#{id}
+    <!-- getEmailById-->
+    <select id="getEmailById" parameterType="int" resultType="String">
+  	SELECT Email FROM employee_login_message WHERE EmpId=#{id}
   </select>
-   <!-- getRegisterMessage-->
-  <select id="getRegisterMessage" parameterType="int" resultType="com.payroll.service.EmployeeUser">
-  	SELECT Username,Password,Email FROM employeeloginmessage WHERE EmpId=#{id}
+    <!-- getRegisterMessage-->
+    <select id="getRegisterMessage" parameterType="int" resultType="com.payroll.service.EmployeeUser">
+  	SELECT Username,Password,Email FROM employee_login_message WHERE EmpId=#{id}
   </select>
 </mapper>

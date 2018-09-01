@@ -6,7 +6,6 @@ import com.payroll.service.Employee;
 import com.payroll.service.SalesReceipt;
 import com.payroll.service.ServiceCharge;
 import com.payroll.service.TimeCard;
-
 public interface PayrollSystemDao {
     void AddEmployee(int id, Employee employee);
 
@@ -32,6 +31,6 @@ public interface PayrollSystemDao {
 
     void changeMethod(Employee e);
 
-    public void addServiceCharge(int memId, ServiceCharge sc);
+    void addServiceCharge(int memId, ServiceCharge sc);
 }
 

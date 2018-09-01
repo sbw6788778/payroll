@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agre   ed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="payrollSystem">
+    <!-- addRegisterMessage -->
+    <insert id="addRegisterMessage" parameterType="Map">
+    INSERT INTO employee_login_message (EmpId,Username,Password,Email) VALUES(#{id},#{username},#{password},#{email})
+  </insert>
+    <!-- loginEmployeeVerification -->
+    <select id="loginEmployeeVerification" parameterType="String" resultType="String">
+  	SELECT Password FROM employee_login_message WHERE Username=#{username}
+  </select>
+    <!-- getIdByUsername-->
+    <select id="getIdByUsername" parameterType="String" resultType="Integer">
+  	SELECT EmpId FROM employee_login_message WHERE Username=#{username}
+  </select>
+    <!-- getEmailById-->
+    <select id="getEmailById" parameterType="int" resultType="String">
+  	SELECT Email FROM employee_login_message WHERE EmpId=#{id}
+  </select>
+    <!-- getRegisterMessage-->
+    <select id="getRegisterMessage" parameterType="int" resultType="com.payroll.service.EmployeeUser">
+  	SELECT Username,Password,Email FROM employee_login_message WHERE EmpId=#{id}
+  </select>
+
+</mapper>

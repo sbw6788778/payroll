@@ -23,6 +23,19 @@
 
   <mappers>
     <mapper resource="sql.xml"/>
+    <mapper resource="affiliation_fee.xml"/>
+    <mapper resource="affiliation_map.xml"/>
+    <mapper resource="bank_account.xml"/>
+    <mapper resource="commissioned_classification.xml"/>
+    <mapper resource="hourly_classification.xml"/>
+    <mapper resource="salaried_classification.xml"/>
+    <mapper resource="employee.xml"/>
+    <mapper resource="employee_login_message.xml"/>
+    <mapper resource="admin_login_message.xml"/>
+    <mapper resource="union_service_fee.xml"/>
+    <mapper resource="paycheck_address.xml"/>
+    <mapper resource="sales_receipt.xml"/>
+    <mapper resource="time_card.xml"/>
   </mappers>
 
 </configuration>

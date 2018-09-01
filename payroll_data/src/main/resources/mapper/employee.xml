@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agre   ed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="payrollSystem">
+    <!-- 添加员工-（保存支付方式和员工类型的信息） -->
+    <insert id="addEmployee" parameterType="com.payroll.service.Employee">
+    INSERT INTO employee (EmpId,Name,Address,ScheduleType,PaymentMethodType,PaymentClassificationType)
+		VALUES(#{EmpId},#{Name},#{Address},#{schedule.messege},#{method.messege},#{classification.messege})
+  </insert>
+
+    <!-- 加载员工类 -->
+    <select id="GetEmployee" parameterType="int" resultType="com.payroll.service.Employee">
+  	SELECT EmpId,Name,Address FROM employee WHERE EmpId=#{id}
+  </select>
+
+    <!-- 加载工资支付周期 -->
+    <select id="loadSchedule" parameterType="int" resultType="String">
+  	SELECT ScheduleType FROM employee WHERE EmpId=#{id}
+  </select>
+
+    <!-- 加载支付方式 -->
+    <select id="loadPaymentMethod" parameterType="int" resultType="String">
+  	SELECT PaymentMethodType FROM employee WHERE EmpId=#{id}
+  </select>
+
+    <!-- 删除员工 -->
+    <delete id="deleteEmployee" parameterType="int">
+  	DELETE FROM employee WHERE EmpId=#{id}
+  </delete>
+
+    <!-- getAllEmployeeIds -->
+    <select id="getAllEmployeeIds" resultType="int">
+  	SELECT EmpId FROM employee
+  </select>
+
+    <!-- changeAddress-->
+    <update id="changeAddress" parameterType="hashmap">
+  	UPDATE employee SET Address=#{address} WHERE EmpId=#{id}
+  </update>
+
+    <!-- changeName-->
+    <update id="changeName" parameterType="hashmap">
+  	UPDATE employee SET Name=#{name} WHERE EmpId=#{id}
+  </update>
+
+    <!-- changeMethod-->
+    <update id="changeMethod" parameterType="hashmap">
+  	UPDATE employee SET PaymentMethodType=#{method} WHERE EmpId=#{id}
+  </update>
+</mapper>
